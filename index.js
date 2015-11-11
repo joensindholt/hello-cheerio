@@ -5,6 +5,7 @@
   var request = require('request');
   var cheerio = require('cheerio');
   var _ = require('lodash');
+  var settings = require('settings.json');
 
   // remember cookies
   request = request.defaults({
@@ -15,8 +16,8 @@
     console.log('Logging in...');
     request.post('https://www.sct-joseph.skoleintra.dk/Infoweb/Fi2/Login.asp?Redirect=', {
       form: {
-        fBrugernavn: '---',
-        fAdgangskode: '---',
+        fBrugernavn: settings.username,
+        fAdgangskode: settings.password,
         B1: 'Login'
       }
     }, function(error, response, body) {
@@ -51,8 +52,8 @@
       request.post('https://sct-joseph.m.skoleintra.dk/Account/IdpLogin', {
         form: {
           'RoleType': 'Parent',
-          'UserName': '---',
-          'Password': '---',
+          'UserName': settings.username,
+          'Password': settings.password,
           '__RequestVerificationToken': '-9MIPC9D9my5oKIwqZFLbCgMZfkSTxhFeEThSKlAjEI9tPgNhL9C2a2DAAtJsa6i0zAHnX28hcM0E9eo9Z6XZ1i8hEc1'
         }
       }, function(error, response, body) {
